@@ -12,7 +12,7 @@ import java.util.Collections;
 
 public class CocktailHelper {
 
-    public static final String BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1";
+    private static final String BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1";
 
     public void fetchRandomCocktail() {
         try {

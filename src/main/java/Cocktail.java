@@ -13,10 +13,20 @@ public class Cocktail {
     private GlassType glassType;
     private String instructions;
     private String thumbnail;
+    private DBConnector connector;
 
     public Cocktail(String cocktailName, String cocktailId) {
         this.name = cocktailName;
         this.id = cocktailId;
+        try {
+            connector = new DBConnector();
+            connector.openConnection();
+        } catch (Exception e) {
+            System.out.println("Error opening connection");
+        }
+
+        connector.executeAddCocktailDetails(id, name);
+
     }
 
     public String getName() {

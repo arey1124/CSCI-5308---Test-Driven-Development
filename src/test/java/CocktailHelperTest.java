@@ -85,7 +85,7 @@ public class CocktailHelperTest {
                 "----------------------------------------------------------------------------------------------------\n" +
                 "Thumbnail URL : https://www.thecocktaildb.com/images/media/drink/qxprxr1454511520.jpg\n" +
                 "----------------------------------------------------------------------------------------------------";
-        assertEquals(expectedOuput, outputStreamCaptor.toString().trim());
+        assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
     }
 
     @Test
@@ -119,7 +119,7 @@ public class CocktailHelperTest {
                 "----------------------------------------------------------------------------------------------------\n" +
                 "Thumbnail URL : https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg\n" +
                 "----------------------------------------------------------------------------------------------------";
-        assertEquals(expectedOuput, outputStreamCaptor.toString().trim());
+        assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
     }
 
     @Test
@@ -153,7 +153,7 @@ public class CocktailHelperTest {
                 "----------------------------------------------------------------------------------------------------\n" +
                 "Thumbnail URL : https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg\n" +
                 "----------------------------------------------------------------------------------------------------";
-        assertEquals(expectedOuput, outputStreamCaptor.toString().trim());
+        assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
     }
 
     @Test
@@ -186,7 +186,7 @@ public class CocktailHelperTest {
                 "|  17222  |  A1                           |\n" +
                 "|  17834  |  Abbey Cocktail               |\n" +
                 "----------------------------------------------------------------------------------------------------";
-        assertEquals(expectedOuput, outputStreamCaptor.toString().trim());
+        assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
 
     }
 
@@ -218,7 +218,7 @@ public class CocktailHelperTest {
                 "|  15423  |  110 in the shade        |\n" +
                 "|  14588  |  151 Florida Bushwacker  |\n" +
                 "----------------------------------------------------------------------------------------------------";
-        assertEquals(expectedOuput, outputStreamCaptor.toString().trim());
+        assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
     }
 
     @Test
@@ -259,7 +259,7 @@ public class CocktailHelperTest {
                 "|  15789   |  Snakebite and Black    |\n" +
                 "|  178347  |  Winter Rita            |\n" +
                 "----------------------------------------------------------------------------------------------------";
-        assertEquals(expectedOuput, outputStreamCaptor.toString().trim());
+        assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
     }
 
     @Test
@@ -291,7 +291,7 @@ public class CocktailHelperTest {
                 "|  178316  |  Honey Bee               |\n" +
                 "|  178330  |  The Philosopher         |\n" +
                 "----------------------------------------------------------------------------------------------------";
-        assertEquals(expectedOuput, outputStreamCaptor.toString().trim());
+        assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
     }
 
     @Test
@@ -322,7 +322,7 @@ public class CocktailHelperTest {
                 "Description : \n" +
                 "Elderflower cordial is a soft drink made largely from a refined sugar and water solution and uses th...\n" +
                 "----------------------------------------------------------------------------------------------------";
-        assertEquals(expectedOuput, outputStreamCaptor.toString().trim());
+        assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
     }
 
     @Test
@@ -353,6 +353,6 @@ public class CocktailHelperTest {
                 "Description : \n" +
                 "Elderflower cordial is a soft drink made largely from a refined sugar and water solution and uses th...\n" +
                 "----------------------------------------------------------------------------------------------------";
-        assertEquals(expectedOuput, outputStreamCaptor.toString().trim());
+        assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
     }
 }

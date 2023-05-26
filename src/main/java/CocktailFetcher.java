@@ -28,6 +28,7 @@ public class CocktailFetcher {
         System.out.println("7. Filter Cocktail by Glass Type");
         System.out.println("8. Get Ingredient details by Name");
         System.out.println("9. Get Ingredient details by Id");
+        System.out.println("10. Exit");
 
         System.out.println("Please select the option number from the above menu to proceed:");
         Scanner scanner = new Scanner(System.in);
@@ -159,6 +160,9 @@ public class CocktailFetcher {
                 System.out.println("Enter the ingredient id :");
                 String ingredientId = scanner.next();
                 cocktailHelper.getIngredientById(ingredientId);
+                break;
+            case "10":
+                System.out.println("Exiting.....");
                 break;
             default:
                 System.out.println("Please enter a valid option");

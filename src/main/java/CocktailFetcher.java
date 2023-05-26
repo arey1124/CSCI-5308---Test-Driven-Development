@@ -8,10 +8,15 @@ public class CocktailFetcher {
 
     public static CocktailHelper cocktailHelper;
 
+    public CocktailFetcher(CocktailHelper cocktailHelper) {
+        this.cocktailHelper = cocktailHelper;
+    }
 
     public static void main(String args[]) {
 
-        cocktailHelper = new CocktailHelper();
+        if(cocktailHelper == null) {
+            cocktailHelper = new CocktailHelper();
+        }
 
         System.out.println("-----COCKTAIL DB-----");
         System.out.println("1. Fetch a random Cocktail");

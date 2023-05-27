@@ -32,7 +32,7 @@ public class DBConnectorTest {
         DBConnector connector = null;
         try {
             connector = new DBConnector();
-            String expectedOutput = "Connection Opened !!";
+            String expectedOutput = "Connection Opened !!\n";
 
             // Verifying that the expected output is achieved
             Assertions.assertTrue(connector.openConnection(),"Connection Successful" );
@@ -46,7 +46,7 @@ public class DBConnectorTest {
     @Test
     public void closeConnectionTest() {
         DBConnector connector = new DBConnector();
-        String expectedOutput = "Connection Closed !!";
+        String expectedOutput = "Connection Closed !!\n";
 
         // Verifying that the expected output is achieved
         Assertions.assertTrue(connector.closeConnection(),"Connection Closed" );

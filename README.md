@@ -11,20 +11,20 @@ I hope that you will be able to find the cocktail details you are searching for!
 **Checklist**
 
 - [x] **800+ lines** of code (Excluding test cases) :tada:
-- [x] Test coverage with **1:1 mapping** of functions (**44 test cases** in total)
-- [x] Follow Test-Driven Development
-- [x] Command line program with user interaction
-- [x] Should compile in local system
-- [x] Must include DB interaction for mocking database
-- [x] Include a readme file with clear instructions
+- [x] Test coverage with **1:1 mapping** of functions (**44 test cases** in total) :100:
+- [x] Follow Test-Driven Development :100:
+- [x] Command line program with user interaction :tada:
+- [x] Should compile in local system :100:
+- [x] Must include DB interaction for mocking database :tada:
+- [x] Include a readme file with clear instructions :100:
 
 **Instructions**
 
-When you first compile and run the program, you will see a menu that displays as below - 
+When you first compile and run the program, you will see a menu that displays as below -
 
 ![Cocktail DB - Menu](./assets/menu.png)
 
-If you want to fetch a random cocktail you can select the **1** option to proceed, and the output is something like below - 
+If you want to fetch a random cocktail you can select the **1** option to proceed, and the output is something like below -
 
 ![Random cocktail details](./assets/randomCocktail.png)
 
@@ -34,7 +34,7 @@ Let's say you want to get a cocktail by name, you can choose the **2** option an
 
 ![Cocktail details by name](./assets/cocktailByName.png)
 
-The above shows how it was able to provide the details for the cocktail we searched for. But if we search for a cocktail that is not present in the DB or an invalid name then we get the following output - 
+The above shows how it was able to provide the details for the cocktail we searched for. But if we search for a cocktail that is not present in the DB or an invalid name then we get the following output -
 
 ![Invalid Name](./assets/InvalidName.png)
 

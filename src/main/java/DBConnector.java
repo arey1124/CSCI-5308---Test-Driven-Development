@@ -6,12 +6,12 @@ public class DBConnector implements IDBConnectorBase {
     private static HashMap<String, String> dbData = new HashMap<>();
 
     public boolean openConnection() throws ConnectException {
-        System.out.print ("Connection Opened !!");
+        System.out.println("Connection Opened !!");
         return true;
     }
 
     public boolean closeConnection() {
-        System.out.print ("Connection Closed !!");
+        System.out.println("Connection Closed !!");
         return true;
     }
 

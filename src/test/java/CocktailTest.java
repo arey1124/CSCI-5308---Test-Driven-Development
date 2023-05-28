@@ -4,6 +4,8 @@ import enums.GlassType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.gen5.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 public class CocktailTest {
@@ -96,5 +98,4 @@ public class CocktailTest {
         // Verify the interactions with the mock object
         verify(cocktail).setThumbnail("https://www.thecocktaildb.com/images/media/drink/5noda61589575159.jpg");
     }
-
 }

@@ -41,10 +41,6 @@ public enum GlassType {
         this.glassName = glassName;
     }
 
-    public String getGlassName() {
-        return glassName;
-    }
-
     public static GlassType fromGlassName(String glassName) {
         for (GlassType glassType : GlassType.values()) {
             if (glassType.glassName.equalsIgnoreCase(glassName)) {

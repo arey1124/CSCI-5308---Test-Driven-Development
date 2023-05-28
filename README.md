@@ -11,7 +11,7 @@ I hope that you will be able to find the cocktail details you are searching for!
 **Checklist**
 
 - [x] **800+ lines** of code (Excluding test cases) :tada:
-- [x] Test coverage with **1:1 mapping** of functions (**44 test cases** in total) :100:
+- [x] Test coverage with **1:1 mapping** of functions (**60 test cases** in total) :100:
 - [x] Follow Test-Driven Development :100:
 - [x] Command line program with user interaction :tada:
 - [x] Should compile in local system :100:
@@ -51,7 +51,7 @@ Below is the test files structure -
 
 ![Test file structure](./assets/testFileStructure.png)
 
-There are a total of **44** test cases & it covers all the test scenarios in and out. The test cases have been verified during development and the below is the screenshot of the passed and total test scenarios covered.
+There are a total of **60** test cases & it covers all the test scenarios in and out. The test cases have been verified during development and the below is the screenshot of the passed and total test scenarios covered.
 
 ![Tests Verified](./assets/testsVerified.png)
 

@@ -2,6 +2,7 @@ import enums.AlcoholicFilter;
 import enums.Category;
 import enums.GlassType;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -96,6 +97,18 @@ public class CocktailFetcherTest {
     }
 
     @Test
+    public void testFilterCocktailByNonAlcoholicFilterValidOption() {
+        String input = "5\n2\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // Calling the method to be tested
+        cocktailFetcher.main(new String[]{});
+
+        // Verifying that the expected method is called
+        verify(cocktailHelper).filterCocktailByAlcoholicFilter(AlcoholicFilter.NON_ALCOHOLIC);
+    }
+
+    @Test
     public void testFilterCocktailByAlcoholicFilterInvalidOption() {
         String input = "5\n3\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
@@ -118,6 +131,60 @@ public class CocktailFetcherTest {
 
         // Verifying that the expected method is called
         verify(cocktailHelper).filterCocktailByCategory(Category.ORDINARY_DRINK);
+
+        input = "6\n2\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // Calling the method to be tested
+        cocktailFetcher.main(new String[]{});
+
+        // Verifying that the expected method is called
+        verify(cocktailHelper).filterCocktailByCategory(Category.SHAKE);
+
+        input = "6\n3\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // Calling the method to be tested
+        cocktailFetcher.main(new String[]{});
+
+        // Verifying that the expected method is called
+        verify(cocktailHelper).filterCocktailByCategory(Category.COCOA);
+
+        input = "6\n4\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // Calling the method to be tested
+        cocktailFetcher.main(new String[]{});
+
+        // Verifying that the expected method is called
+        verify(cocktailHelper).filterCocktailByCategory(Category.SHOT);
+
+        input = "6\n5\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // Calling the method to be tested
+        cocktailFetcher.main(new String[]{});
+
+        // Verifying that the expected method is called
+        verify(cocktailHelper).filterCocktailByCategory(Category.HOMEMADE_LIQUEUR);
+
+        input = "6\n6\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // Calling the method to be tested
+        cocktailFetcher.main(new String[]{});
+
+        // Verifying that the expected method is called
+        verify(cocktailHelper).filterCocktailByCategory(Category.BEER);
+
+        input = "6\n7\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // Calling the method to be tested
+        cocktailFetcher.main(new String[]{});
+
+        // Verifying that the expected method is called
+        verify(cocktailHelper).filterCocktailByCategory(Category.SOFT_DRINK);
     }
 
     @Test
@@ -135,7 +202,16 @@ public class CocktailFetcherTest {
 
     @Test
     public void testFilterCocktailByGlassValidOption() {
-        String input = "7\n2\n";
+        String input = "7\n1\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // Calling the method to be tested
+        cocktailFetcher.main(new String[]{});
+
+        // Verifying that the expected method is called
+        verify(cocktailHelper).filterCocktailByGlass(GlassType.HIGHBALL_GLASS);
+
+        input = "7\n2\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         // Calling the method to be tested
@@ -143,6 +219,33 @@ public class CocktailFetcherTest {
 
         // Verifying that the expected method is called
         verify(cocktailHelper).filterCocktailByGlass(GlassType.COCKTAIL_GLASS);
+
+        input = "7\n3\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // Calling the method to be tested
+        cocktailFetcher.main(new String[]{});
+
+        // Verifying that the expected method is called
+        verify(cocktailHelper).filterCocktailByGlass(GlassType.CHAMPAGNE_FLUTE);
+
+        input = "7\n4\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // Calling the method to be tested
+        cocktailFetcher.main(new String[]{});
+
+        // Verifying that the expected method is called
+        verify(cocktailHelper).filterCocktailByGlass(GlassType.SHOT_GLASS);
+
+        input = "7\n5\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // Calling the method to be tested
+        cocktailFetcher.main(new String[]{});
+
+        // Verifying that the expected method is called
+        verify(cocktailHelper).filterCocktailByGlass(GlassType.MARGARITA_GLASS);
     }
 
     @Test
@@ -192,6 +295,19 @@ public class CocktailFetcherTest {
 
         // Verifying that there is no further interactions and the output is as expected
         String expectedOutput = "Please enter a valid option";
+        assertEquals(true, outputStreamCaptor.toString().contains(expectedOutput));
+    }
+
+    @Test
+    public void testExitSelected() {
+        String input = "10\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // Calling the method to be tested
+        cocktailFetcher.main(new String[]{});
+
+        // Verifying that the exit option is selected
+        String expectedOutput = "Exiting.....";
         assertEquals(true, outputStreamCaptor.toString().contains(expectedOutput));
     }
 }

@@ -13,6 +13,7 @@ import java.io.PrintStream;
 import java.net.HttpURLConnection;
 
 import static org.junit.gen5.api.Assertions.assertEquals;
+import static org.junit.gen5.api.Assertions.expectThrows;
 import static org.mockito.Mockito.*;
 
 public class CocktailHelperTest {
@@ -123,6 +124,19 @@ public class CocktailHelperTest {
     }
 
     @Test
+    public void testGetCocktailByNameException() throws IOException {
+
+        // Create a partial mock for the CocktailService
+        CocktailHelper cocktailServiceMock = spy(CocktailHelper.class);
+
+        String apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=masusgasghasg";
+        // Mock the sendGetRequest method to return the mock response
+        when(cocktailServiceMock.sendGetRequest(apiUrl)).thenThrow(new IOException("Error!"));
+
+        cocktailServiceMock.getCocktailByName("masusgasghasg");
+    }
+
+    @Test
     public void testGetCocktailById() throws IOException {
 
         // Create a partial mock for the CocktailService
@@ -154,6 +168,44 @@ public class CocktailHelperTest {
                 "Thumbnail URL : https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg\n" +
                 "----------------------------------------------------------------------------------------------------";
         assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
+    }
+
+    @Test
+    public void testGetCocktailByInvalidId() throws IOException {
+
+        // Create a partial mock for the CocktailService
+        CocktailHelper cocktailServiceMock = spy(CocktailHelper.class);
+
+        // Create a mock response
+        String mockResponse = "{}";
+
+        String apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=1100700000";
+        // Mock the sendGetRequest method to return the mock response
+        when(cocktailServiceMock.sendGetRequest(apiUrl)).thenReturn(mockResponse);
+
+        // Call the method under test
+        cocktailServiceMock.getCocktailById("1100700000");
+
+        // Verify that the sendGetRequest method was called with the correct URL
+        verify(cocktailServiceMock).sendGetRequest(eq(BASE_URL + "/lookup.php?i=1100700000"));
+
+        // Verify the behavior indirectly by checking that the sendGetRequest method was called
+        verify(cocktailServiceMock).sendGetRequest(anyString());
+        String expectedOuput = "Please enter a valid cocktail Id";
+        assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
+    }
+
+    @Test
+    public void testGetCocktailByIdException() throws IOException {
+
+        // Create a partial mock for the CocktailService
+        CocktailHelper cocktailServiceMock = spy(CocktailHelper.class);
+
+        String apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=1100700000";
+        // Mock the sendGetRequest method to return the mock response
+        when(cocktailServiceMock.sendGetRequest(apiUrl)).thenThrow(new IOException("Error!"));
+
+        cocktailServiceMock.getCocktailById("1100700000");
     }
 
     @Test
@@ -191,6 +243,45 @@ public class CocktailHelperTest {
     }
 
     @Test
+    public void testSearchCocktailByInvalidIngredients() throws IOException {
+
+        // Create a partial mock for the CocktailService
+        CocktailHelper cocktailServiceMock = spy(CocktailHelper.class);
+
+        // Create a mock response
+        String mockResponse = "{\"drinks\":[]}";
+
+        String apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gincccccc";
+        // Mock the sendGetRequest method to return the mock response
+        when(cocktailServiceMock.sendGetRequest(apiUrl)).thenReturn(mockResponse);
+
+        // Call the method under test
+        cocktailServiceMock.searchCocktailByIngredients("Gincccccc");
+
+        // Verify that the sendGetRequest method was called with the correct URL
+        verify(cocktailServiceMock).sendGetRequest(eq(BASE_URL + "/filter.php?i=Gincccccc"));
+
+        // Verify the behavior indirectly by checking that the sendGetRequest method was called
+        verify(cocktailServiceMock).sendGetRequest(anyString());
+        String expectedOuput = "There do not exists any cocktails with the ingredient - Gincccccc";
+        assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
+
+    }
+
+    @Test
+    public void testSearchCocktailByIngredientsException() throws IOException {
+
+        // Create a partial mock for the CocktailService
+        CocktailHelper cocktailServiceMock = spy(CocktailHelper.class);
+
+        String apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gincccccc";
+        // Mock the sendGetRequest method to return the mock response
+        when(cocktailServiceMock.sendGetRequest(apiUrl)).thenThrow(new IOException("Error!"));
+
+        cocktailServiceMock.searchCocktailByIngredients("Gincccccc");
+    }
+
+    @Test
     public void testFilterCocktailByAlcoholicFilter() throws IOException {
 
         // Create a partial mock for the CocktailService
@@ -219,6 +310,18 @@ public class CocktailHelperTest {
                 "|  14588  |  151 Florida Bushwacker  |\n" +
                 "----------------------------------------------------------------------------------------------------";
         assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
+    }
+
+    @Test
+    public void testFilterCocktailByAlcoholException() throws IOException {
+        // Create a partial mock for the CocktailService
+        CocktailHelper cocktailServiceMock = spy(CocktailHelper.class);
+
+        String apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=ALCOHOLIC";
+        // Mock the sendGetRequest method to return the mock response
+        when(cocktailServiceMock.sendGetRequest(apiUrl)).thenThrow(new IOException("Error!"));
+
+        cocktailServiceMock.filterCocktailByAlcoholicFilter(AlcoholicFilter.ALCOHOLIC);
     }
 
     @Test
@@ -263,6 +366,18 @@ public class CocktailHelperTest {
     }
 
     @Test
+    public void testFilterCocktailByCategoryException() throws IOException {
+        // Create a partial mock for the CocktailService
+        CocktailHelper cocktailServiceMock = spy(CocktailHelper.class);
+
+        String apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=BEER";
+        // Mock the sendGetRequest method to return the mock response
+        when(cocktailServiceMock.sendGetRequest(apiUrl)).thenThrow(new IOException("Error!"));
+
+        cocktailServiceMock.filterCocktailByCategory(Category.BEER);
+    }
+
+    @Test
     public void testFilterCocktailByGlass() throws IOException {
         // Create a partial mock for the CocktailService
         CocktailHelper cocktailServiceMock = spy(CocktailHelper.class);
@@ -292,6 +407,18 @@ public class CocktailHelperTest {
                 "|  178330  |  The Philosopher         |\n" +
                 "----------------------------------------------------------------------------------------------------";
         assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
+    }
+
+    @Test
+    public void testFilterCocktailByGlassException() throws IOException {
+        // Create a partial mock for the CocktailService
+        CocktailHelper cocktailServiceMock = spy(CocktailHelper.class);
+
+        String apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?g=MARGARITA_GLASS";
+        // Mock the sendGetRequest method to return the mock response
+        when(cocktailServiceMock.sendGetRequest(apiUrl)).thenThrow(new IOException("Error!"));
+
+        cocktailServiceMock.filterCocktailByGlass(GlassType.MARGARITA_GLASS);
     }
 
     @Test
@@ -326,6 +453,42 @@ public class CocktailHelperTest {
     }
 
     @Test
+    public void testGetIngredientByInvalidId() throws IOException {
+        // Create a partial mock for the CocktailService
+        CocktailHelper cocktailServiceMock = spy(CocktailHelper.class);
+
+        // Create a mock response
+        String mockResponse = "{\"ingredients\":[]}";
+
+        String apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?iid=552000";
+        // Mock the sendGetRequest method to return the mock response
+        when(cocktailServiceMock.sendGetRequest(apiUrl)).thenReturn(mockResponse);
+
+        // Call the method under test
+        cocktailServiceMock.getIngredientById("552000");
+
+        // Verify that the sendGetRequest method was called with the correct URL
+        verify(cocktailServiceMock).sendGetRequest(eq(BASE_URL + "/lookup.php?iid=552000"));
+
+        // Verify the behavior indirectly by checking that the sendGetRequest method was called
+        verify(cocktailServiceMock).sendGetRequest(anyString());
+        String expectedOuput = "Please enter a valid ingredient Id";
+        assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
+    }
+
+    @Test
+    public void testGetIngredientsByIdException() throws IOException {
+        // Create a partial mock for the CocktailService
+        CocktailHelper cocktailServiceMock = spy(CocktailHelper.class);
+
+        String apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?iid=552000";
+        // Mock the sendGetRequest method to return the mock response
+        when(cocktailServiceMock.sendGetRequest(apiUrl)).thenThrow(new IOException("Error!"));
+
+        cocktailServiceMock.getIngredientById("552000");
+    }
+
+    @Test
     public void testGetIngredientsByName() throws IOException {
         // Create a partial mock for the CocktailService
         CocktailHelper cocktailServiceMock = spy(CocktailHelper.class);
@@ -354,5 +517,41 @@ public class CocktailHelperTest {
                 "Elderflower cordial is a soft drink made largely from a refined sugar and water solution and uses th...\n" +
                 "----------------------------------------------------------------------------------------------------";
         assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
+    }
+
+    @Test
+    public void testGetIngredientsByInvalidName() throws IOException {
+        // Create a partial mock for the CocktailService
+        CocktailHelper cocktailServiceMock = spy(CocktailHelper.class);
+
+        // Create a mock response
+        String mockResponse = "{\"ingredients\":[]}";
+
+        String apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/search.php?i=elderflowergasdvgsdgsad";
+        // Mock the sendGetRequest method to return the mock response
+        when(cocktailServiceMock.sendGetRequest(apiUrl)).thenReturn(mockResponse);
+
+        // Call the method under test
+        cocktailServiceMock.getIngredientsByName("elderflowergasdvgsdgsad");
+
+        // Verify that the sendGetRequest method was called with the correct URL
+        verify(cocktailServiceMock).sendGetRequest(eq(BASE_URL + "/search.php?i=elderflowergasdvgsdgsad"));
+
+        // Verify the behavior indirectly by checking that the sendGetRequest method was called
+        verify(cocktailServiceMock).sendGetRequest(anyString());
+        String expectedOuput = "Please enter a valid ingredient name";
+        assertEquals(expectedOuput, outputStreamCaptor.toString().replaceAll("Connection Opened !!", "").trim());
+    }
+
+    @Test
+    public void testGetIngredientsByNameException() throws IOException {
+        // Create a partial mock for the CocktailService
+        CocktailHelper cocktailServiceMock = spy(CocktailHelper.class);
+
+        String apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/search.php?i=elderflowergasdvgsdgsad";
+        // Mock the sendGetRequest method to return the mock response
+        when(cocktailServiceMock.sendGetRequest(apiUrl)).thenThrow(new IOException("Error!"));
+
+        cocktailServiceMock.getIngredientsByName("elderflowergasdvgsdgsad");
     }
 }
